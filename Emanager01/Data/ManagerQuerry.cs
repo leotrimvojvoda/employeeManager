@@ -22,7 +22,7 @@ namespace Emanager01.Data
 
         public void add(object obj)
         {
-            if (obj is Manager && obj != null)
+            if (obj != null && obj is Manager)
             {
                 try
                 {
@@ -58,6 +58,23 @@ namespace Emanager01.Data
             }
 
             return null;
+        }
+
+
+        public Manager getManagerByEmail(String email)
+        {
+            try
+            {
+                var man = emx.Managers.First(m => m.Email == email);
+
+                return man;
+            }catch(Exception e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine("ERROR GET MANAGER BY EMAIL");
+            }
+            return null;
+
         }
 
         public void update(string id, object newManager)
@@ -116,5 +133,7 @@ namespace Emanager01.Data
                 Console.WriteLine("ERROR DELETING MANAGER");
             }
         }
+
+
     }
 }

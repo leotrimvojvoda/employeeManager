@@ -1,8 +1,60 @@
-﻿@{
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Emanager</a>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+@{
     ViewData["Title"] = "Home Page";
 }
 
+@model Manager
+
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Login to Employee Management System</h1>
+    <br />
+    <br />
+
+
+    <!--This is a submit form using cshtml syntax-->
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    {
+
+
+        <!--Textbox for email-->
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
+        <!--Binds the validation rules with html elements to display the error-->
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
+
+
+
+        <br />
+        <br />
+
+        <!--Password field-->
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control", @id = "pwdField", @placeholder = "Password" })
+        <!--Binds the validation rules with html elements to display the error-->
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error" })
+
+        <br />
+        <br />
+        <br />
+
+        <button type="submit" value="Login" class="btn btn-primary" id="submit">Login</button>
+    }
+
+
 </div>
+
+
+<!--Loading DOTS-->
+<div class="loader" id="ldr"></div>

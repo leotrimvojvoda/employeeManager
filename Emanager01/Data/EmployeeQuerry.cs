@@ -33,7 +33,7 @@ namespace Emanager01.Data
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("ERROR");
+                    Console.WriteLine("ERROR ADDING EMPLOYEE");
                     Console.WriteLine(e);
                 }
             }

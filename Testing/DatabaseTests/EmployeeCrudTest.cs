@@ -11,14 +11,16 @@ namespace Testing.DatabaseTests
     public class EmployeeCrudTest : CRUDTest
     {
 
-       Employee employee = new Employee("Abdullah","Selmani", new DateTime(2010, 12, 31),
-            "Instructor","anik2009@gmail.com","M",049215737,"AS01CT","AS01AD");
+       Employee employee = new Employee("Valmir","Idrizi", new DateTime(2022, 01, 06),
+            "Marketing","valmir@gmail.com","M",044642832,"NA","NA");
 
 
 
-        [Fact(Skip = "Just")]
+        [Fact]
         public void addTest()
         {
+
+
             var emx = new EmployeeQuerry();
 
             emx.add(employee);

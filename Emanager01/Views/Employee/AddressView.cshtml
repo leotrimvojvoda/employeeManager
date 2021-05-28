@@ -1,0 +1,149 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Emanager</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Employee">Employees</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+@{
+    
+    ViewData["Title"] = "Address View";
+}
+
+
+
+@model Employee
+
+<div class="text-center">
+
+    @if (Model != null)
+    {
+
+
+        /*UNHANDELEED ERROR - GET NON-EXISTENT ADDRESS*/
+
+
+        Emanager01.Data.AddressQuerry addressQuerry = new Emanager01.Data.AddressQuerry();
+
+        Address address = (Address)addressQuerry.get(Model.AddressId);
+
+        if (address != null)
+        {
+
+
+            @using (Html.BeginForm("UpdateAddress", "Employee", FormMethod.Post))
+            {
+                <h5>@Model.FirstName's Address</h5>
+                <hr />
+                <br />
+
+                @Html.LabelFor(m => address.AddressId, new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(m => address.AddressId, new { @class = "form-control",
+                @value = address.AddressId, @placeholder = "Address ID", @readonly = "true" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.AddressId, "", new { @class = "error" })
+                <br />
+                @Html.LabelFor(m => address.State, new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(model => address.State, new { @class = "form-control", @value = address.State, @placeholder = "State" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.State, "", new { @class = "error" });
+                <br />
+                @Html.LabelFor(m => address.City, new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(model => address.City, new { @class = "form-control", @value = address.City, @placeholder = "City" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.City, "", new { @class = "error" })
+                <br />
+                @Html.LabelFor(m => address.Street, new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(model => address.Street, new { @class = "form-control", @value = address.Street, @placeholder = "Street" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.Street, "", new { @class = "error" })
+                <br />
+                @Html.LabelFor(m => address.HouseNumber, "House Number", new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(model => address.HouseNumber, new { @class = "form-control", @value = address.HouseNumber, @placeholder = "House Number" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.HouseNumber, "", new { @class = "error" })
+                <br />
+                <br />
+                <br />
+                <button type="submit" value="Login" class="btn btn-warning" id="submit">Update Address</button>
+            }
+        }
+        else
+        {
+
+            @using (Html.BeginForm("SaveAddress", "Employee", FormMethod.Post))
+            {
+                address = new Address();
+
+                <h8 style="color:red">@Model.FirstName has no registered address</h8>
+                <br />
+                <h8>Please add an address for <span style="font-weight: bold">@Model.FirstName</span></h8>
+                <hr />
+                <br />
+
+                /*Because we are no allowed to pass more than one Model to the controler, I used this workaround way to send the
+                    neccessary data over using the empty field in Address ID. Here I use the first letter from first name and
+                first letter from last name which I use to build the addres id, then I add the employee ID
+
+                example: Filan Fisteku 23 = FF23 then I add the AD letters in the controler forming FF23AD as an unique ID for Address
+
+                    */
+
+                string id = Model.FirstName[0].ToString() + Model.LastName[0].ToString() + Model.EmployeeId;
+                @Html.LabelFor(m => address.AddressId, new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(m => address.AddressId, new { @class = "form-control", @placeholder = "Address ID",
+                @value = address.AddressId = id, @readonly = "true" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.AddressId, "", new { @class = "error" })
+                <br />
+                @Html.LabelFor(m => address.State, new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(m => address.State, new { @class = "form-control", @placeholder = "State" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.State, "", new { @class = "error" })
+                <br />
+                @Html.LabelFor(m => address.City, new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(model => address.City, new { @class = "form-control", @placeholder = "City" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.City, "", new { @class = "error" })
+                <br />
+                @Html.LabelFor(m => address.Street, new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(model => address.Street, new { @class = "form-control", @placeholder = "Street Name" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.Street, "", new { @class = "error" })
+                <br />
+                @Html.LabelFor(m => address.HouseNumber, "House Number", new { @class = "textBoxInfoLable" });
+                @Html.TextBoxFor(model => address.HouseNumber, new { @class = "form-control", @placeholder = "House Number" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => address.HouseNumber, "", new { @class = "error" })
+                <br />
+                <br />
+                <br />
+                <button type="submit" value="Login" class="btn btn-primary" id="submit">Save Address</button>
+            }
+        }
+    }
+
+    else
+    {
+        <h4 style="color: orange">Error alogn the way...😋</h4>
+    }
+
+</div>
+

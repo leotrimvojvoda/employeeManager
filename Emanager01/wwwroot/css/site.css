@@ -5,6 +5,7 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+
 }
 
 /* Provide sufficient contrast against white background */
@@ -28,6 +29,7 @@ a {
 -------------------------------------------------- */
 html {
   font-size: 14px;
+
 }
 @media (min-width: 768px) {
   html {
@@ -69,3 +71,235 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+
+/*-----------------------FORM--------------------------- */
+
+.error {
+    color: red;
+}
+
+
+body {
+    text-align: center;
+}
+
+form {
+    width: 30%;
+    display: inline-block;
+    border: #c9c7c7 solid 1px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 50px;
+}
+
+
+/*---------------------LOADER-------------------------- */
+.loader,
+.loader:before,
+.loader:after {
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation: load7 1.8s infinite ease-in-out;
+    animation: load7 1.8s infinite ease-in-out;
+}
+
+.loader {
+    color: #8f8f8f;
+    font-size: 10px;
+    margin: 80px auto;
+    position: relative;
+    text-indent: -9999em;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+    display: none;
+    opacity: 0.5;
+}
+
+    .loader:before,
+    .loader:after {
+        content: '';
+        position: absolute;
+        top: 0;
+    }
+
+    .loader:before {
+        left: -3.5em;
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+
+    .loader:after {
+        left: 3.5em;
+    }
+
+@-webkit-keyframes load7 {
+    0%, 80%, 100% {
+        box-shadow: 0 2.5em 0 -1.3em;
+    }
+
+    40% {
+        box-shadow: 0 2.5em 0 0;
+    }
+}
+
+@keyframes load7 {
+    0%, 80%, 100% {
+        box-shadow: 0 2.5em 0 -1.3em;
+    }
+
+    40% {
+        box-shadow: 0 2.5em 0 0;
+    }
+}
+
+.wrapper{
+    text-align:center;
+}
+
+.btn-add {
+    display: inline;
+    width: 30%;
+    margin-right: 20px;
+    float: left;
+}
+
+.search {
+    display: inline;
+    width: 30%;
+    float: right;
+    margin-right:20px;
+    
+}
+
+.form-control datepicker{
+    display: inline;
+}
+
+.textBoxInfoLable{
+    float: left;
+}
+
+.form{
+    width: 50%;
+}
+
+.form-control addEmployee{
+ display: inline-block;
+
+}
+
+.login-form {
+    border-style: none;
+    display: inline-flex;
+    margin: 0;
+    float: right;
+    margin-top:-10px;
+}
+
+.searchBox{
+    margin-right:10px;
+    
+}
+
+.tabs {
+    margin: 10px;
+    height: 170px;
+    text-align: center;
+    border: 1px solid #BFB4FA;
+    border-radius: 10px;
+    opacity: 0.9;
+    box-shadow: 5px 5px 10px #999;
+    color: #333;
+    background-color: #FCFCFF;
+}
+
+.tabName {
+    font-size: 30px;
+    text-transform: uppercase;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: bold;
+}
+
+.tabLable {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#tabEmployees {
+    background-image: url("Employees.png");
+    background-size: cover;
+
+}
+
+#tabContracts {
+    background-image: url("contracts.png");
+    background-size: cover;
+  
+}
+
+#tabCities {
+    background-image: url("cities.png");
+    background-size: cover;
+}
+
+#tabRemarks {
+    background-image: url("remarks.png");
+    background-size: cover;
+}
+
+#tabDepartaments {
+    background-image: url("departaments.png");
+    background-size: cover;
+}
+
+#tabGender {
+    background-image: url("contracts.png");
+    background-size: cover;
+}
+
+.table {
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+    .table th,
+    .table td {
+        padding: 0.50rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+body {
+    padding-left: 0 !important
+}
+
+
+
+.depInfo {
+    margin: auto;
+}
+
+    .depInfo .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        .depInfo .table th,
+        .table td {
+            padding: 0.75rem;
+            margin: 1.0rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }

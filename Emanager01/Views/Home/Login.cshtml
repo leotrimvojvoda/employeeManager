@@ -1,0 +1,156 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Emanager</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="dashboard">Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+
+@model IEnumerable<Employee>
+
+
+@{
+
+    int empNumber = 0;
+    int male = 0;
+    int female = 0;
+    int contracts = 0;
+    int addresses = 0;
+
+    /*Departaments*/
+    int salesNr = 0;
+    int financeNr = 0;
+    int marketingNr = 0;
+    int researchNr = 0;
+    int hrmNr = 0;
+    int productionNr = 0;
+    //AddressQuerry addressQuerry = new AddressQuerry();
+
+    foreach (Employee employee in Model)
+    {
+
+        empNumber++;
+
+        if (employee.Gender.Equals("F"))
+            female++;
+        else
+            male++;
+
+        if (!employee.AddressId.Trim().Equals("NA"))
+            addresses++;
+
+        if (!employee.ContractId.Trim().Equals("NA"))
+            contracts++;
+
+
+        switch (employee.Position)
+        {
+            case ("Sales"):
+                salesNr++;
+                break;
+            case ("Finance"):
+                financeNr++;
+                break;
+            case ("Marketing"):
+                marketingNr++;
+                break;
+            case ("Research and Development"):
+                researchNr++;
+                break;
+            case ("Human Resource Management"):
+                hrmNr++;
+                break;
+            case ("Production"):
+                productionNr++;
+                break;
+        }
+    }
+
+    }
+
+
+<head>
+
+
+</head>
+
+<div class="text-center">
+    <br />
+    <br />
+    <h3>EMS Dashboard</h3>
+    <br />
+    <br />
+
+    <div id="wrapper">
+
+
+        <a class="btn btn-primary col-md-3 tabs" id="tabEmployees" href="@Url.Action("Employee","Employee")">
+            <span class="tabName">Employees</span>
+            <br />
+            <span class="tabLable">Total: @empNumber</span>
+        </a>
+
+        <a class="btn btn-primary col-md-3 tabs" id="tabDepartaments" href="@Url.Action("DepartamentView","Employee")">
+            <span class="tabName">Departaments</span>
+            <br />
+            <br />
+            <span class="tabLable" style ="float: left">Production: @productionNr</span>
+             <br />
+            <span class="tabLable" style ="float: left">Sales: @salesNr</span>
+            <br />
+            <span class="tabLable" style=" float: left">Click for more...</span>
+
+
+        </a>
+
+
+        <a class="btn btn-primary col-md-3 tabs" id="tabGender" href="@Url.Action("GenderStats","Employee")">
+            <span class="tabName">Gender</span>
+            <br />
+            <span class="tabLable">Male: @male <br /> Female: @female</span>
+        </a>
+
+        <a class="btn btn-primary col-md-3 tabs" id="tabContracts" href="@Url.Action("ContractStats","Employee")">
+            <span class="tabName">Contracts</span>
+            <br />
+            <span class="tabLable">Total: @contracts</span>
+        </a>
+
+        <a class="btn btn-primary col-md-3 tabs" id="tabCities" href="@Url.Action("LocationStats","Employee")">
+            <span class="tabName">Locations</span>
+            <br />
+            <span class="tabLable" >Total: @addresses</span>
+        </a>
+
+        <a class="btn btn-primary col-md-3 tabs" id="tabRemarks" href="@Url.Action("ReamrksView","Employee")">
+            <span class="tabName">Remarks</span>
+            <br />
+            <br />
+            <span class="tabLable">Total: --</span>
+        </a>
+
+    </div>
+
+    <!--Loading DOTS-->
+    <div class="loader" id="ldr"></div>
+</div>

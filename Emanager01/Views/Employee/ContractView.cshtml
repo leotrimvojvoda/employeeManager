@@ -1,0 +1,116 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Emanager</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Employee">Employees</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+@{
+
+    ViewData["Title"] = " View";
+}
+
+@model Employee
+
+
+
+<div class="text-center">
+
+
+
+
+    @if (Model != null)
+    {
+
+
+        Emanager01.Data.ContractQuerry contractQuerry = new Emanager01.Data.ContractQuerry();
+
+        Contract contract = (Contract)contractQuerry.get(Model.ContractId);
+
+
+        if (contract != null)
+        {
+
+            @using (Html.BeginForm("UpdateContract", "Employee", FormMethod.Post))
+            {
+
+                <h5>@Model.FirstName's Contract</h5>
+                <hr />
+                <br />
+                @Html.LabelFor(m => contract.ContractId, new { @class = "textBoxInfoLable" })
+                @Html.TextBoxFor(m => contract.ContractId, new { @class = "form-control", @value = contract.ContractId, @readonly = "true" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => contract.ContractId, "", new { @class = "error" })
+                <br />
+                <label for="start" class="textBoxInfoLable">Start of Contract</label>
+                <input type="date" id="start" name="start" value="@contract.StartDate.ToString("yyyy-MM-dd")"
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" max="2099-01-01" class="form-control datepicker">
+                <br />
+                <label for="end" class="textBoxInfoLable">End of Contract</label>
+                <input type="date" id="start" name="End" value="@contract.EndDate.ToString("yyyy-MM-dd")"
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" max="20099-01-01" class="form-control datepicker">
+                <br />
+                @Html.LabelFor(m => contract.Salary, new { @class = "textBoxInfoLable" })
+                @Html.TextBoxFor(m => contract.Salary, new { @class = "form-control", @value = contract.Salary, @placeholder = "Salary", @name = "salary" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => contract.Salary, "", new { @class = "error" })
+                <br />
+                <br />
+                <button type="submit" value="Login" class="btn btn-warning" id="submit">Update Contract</button>
+            }
+        }
+        else
+        {
+
+            @using (Html.BeginForm("SaveContract", "Employee", FormMethod.Post))
+            {
+
+                <h8 style="color:red">@Model.FirstName has no registered contract</h8>
+                <br />
+                <h8>Pleas add a contract for @Model.FirstName</h8>
+                <hr />
+                <br />
+                //Save id in an invisible field in order to be able to get it from the controler
+                <input type="text" name="id" value="@Model.EmployeeId" style="display: none" />
+                //Save full name initials in an invisible field in order to be able to get it from the controler
+                <input type="text" name="initials" value="@Model.FirstName[0]@Model.LastName[0]" style="display: none" />
+
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => contract.ContractId, "", new { @class = "error" })
+                <br />
+                <label for="start" class="textBoxInfoLable">Start of Contract</label>
+                <input type="date" name="start" class="form-control datepicker" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="20099-01-01">
+                <br />
+                <label for="end" class="textBoxInfoLable">End of Contract</label>
+                <input type="date" name="end" class="form-control datepicker" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="20099-01-01">
+                <br />
+                @Html.LabelFor(m => contract.Salary, new { @class = "textBoxInfoLable" })
+                @Html.TextBoxFor(m => contract.Salary, new { @class = "form-control", @placeholder = "Salary" })
+                <!--Binds the validation rules with html elements to display the error-->
+                @Html.ValidationMessageFor(model => contract.Salary, "", new { @class = "error" })
+                <br />
+                <br />
+                <button type="submit" value="Login" class="btn btn-primary" id="submit">Save Contract</button>
+
+            }
+        }
+    }
+</div>
+
